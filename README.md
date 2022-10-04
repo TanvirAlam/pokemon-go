@@ -5,8 +5,9 @@
 
 # Introduction:
 
-    This is simple application that gets pokemon information form `https://pokeapi.co/api/v2/`,  and displays initial 20 pokomon per page. 
-    User can search for particular pokemon and view its details information such as `Name`, `Height`, `Weight`, `List of abilities`. There is pagination for user to search for more pokomon-go
+This is simple application that gets pokemon information form https://pokeapi.co/api/v2/,  and displays initial 20 pokomon per page. 
+User can search for particular pokemon and view its details information such as Name, Height, Weight, List of abilities. 
+There is pagination for user to search for more pokomon-go
 
 # Pokemon-Go: 
 
