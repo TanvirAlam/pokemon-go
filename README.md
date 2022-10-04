@@ -1,3 +1,17 @@
+
+<p align="center">
+  <img 
+    width="250"
+    height="250"
+    src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1920px-International_Pok%C3%A9mon_logo.svg.png"
+  >
+</p>
+
+# Introduction:
+
+    This is simple application that gets pokemon information form `https://pokeapi.co/api/v2/`,  and displays initial 20 pokomon per page. 
+    User can search for particular pokemon and view its details information such as `Name`, `Height`, `Weight`, `List of abilities`. There is pagination for user to search for more pokomon-go
+
 # Pokemon-Go: 
 
 - [ ] Checked itemCreate a web application to list all Pokémon and show paginated results
@@ -11,6 +25,7 @@
 - [ ] User should be taken to the details page and present all the information available for that Pokémon. 
 
 #### How to start:
+
 ### `npm start`
 ### `npm test`
 ### `npm run build`
