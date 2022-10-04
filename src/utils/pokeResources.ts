@@ -24,10 +24,11 @@ export const types = [
 let regexPat: RegExp = /\/pokemon\/(\d+)\//;
 
 export const fetchPokemon = async (props: any) => {
-    const { setPokemonList, ItemPerPage } = props;
+    const { setPokemonList, setLoaded, ItemPerPage } = props;
     let offsetNum = 0;
     let currentUrlParams: URLSearchParams = new URLSearchParams(window.location.search);
     let currentPageNum: number = Number(currentUrlParams.get("page"));
+    setLoaded(false);
 
     if (currentPageNum > ItemPerPage) { }
     if (!currentPageNum) {
@@ -45,6 +46,7 @@ export const fetchPokemon = async (props: any) => {
     });
 
     setPokemonList(pokemon);
+    setLoaded(true);
 }
 
 export const handleFilterList = async (props: any) => {
