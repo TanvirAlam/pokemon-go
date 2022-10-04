@@ -36,3 +36,7 @@ There is pagination for user to search for more pokomon-go
 - styled-components: https://styled-components.com/: Styled-components allows you to write actual CSS code to style your components.
 - Testing: https://jestjs.io/docs/tutorial-react: Use Jest to test React applications and componenets.
 - Typescript: https://www.typescriptlang.org/: TypeScript adds additional syntax to JavaScript to support a tighter integration with your editor. Catch errors early in your editor.
+
+# Animation:
+
+  ![pokomon-go.gif](pokomon-go.gif)
