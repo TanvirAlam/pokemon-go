@@ -92,3 +92,25 @@ export const handleFilterList = async (props: any) => {
         setNewPokemonList(cutPokemon);
     }
 }
+
+export const pagesClicked = async (props: any) => {
+    const { direction, setLoaded, setPokemonList, setNewPokemonList, ItemPerPage, filterList, navigateTo } = props;
+    let currentUrlParams = new URLSearchParams(window.location.search);
+    let currentPageNum = Number(currentUrlParams.get("page"));
+    if (!currentPageNum) {
+        currentPageNum = 1;
+    }
+    if (direction === "next") {
+        currentPageNum = currentPageNum + 1;
+    } else if (direction === "prev" && currentPageNum !== 1) {
+        currentPageNum = currentPageNum - 1;
+    } else {
+        currentPageNum = 1;
+    }
+    currentUrlParams.set("page", currentPageNum.toString());
+    navigateTo(`?page=${currentPageNum}`);
+
+    !filterList ?
+        fetchPokemon({ setLoaded, setPokemonList, setNewPokemonList, ItemPerPage }) :
+        handleFilterList({ setNewPokemonList, ItemPerPage, filterList });
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { fetchPokemon, handleFilterList } from '../../utils/pokeResources';
+import { fetchPokemon, handleFilterList, pagesClicked } from '../../utils/pokeResources';
 import { LoadingContainer } from "../loading/Loading.module";
+import { Pagenation } from "../pagenation/Pagenation";
 import { PokeGrid } from "../pokegrid/PokeGrid";
 
 export const PokeCalls = ({ navigateTo, filterList, handleFilter }: any) => {
@@ -18,10 +19,24 @@ export const PokeCalls = ({ navigateTo, filterList, handleFilter }: any) => {
         }
     }, [ItemPerPage, filterList]);
     
+    const handlePagesClick = (direction: any) => {
+        pagesClicked({ 
+            direction, 
+            setLoaded, 
+            setPokemonList, 
+            setNewPokemonList, 
+            ItemPerPage, 
+            filterList, 
+            navigateTo 
+        });
+    }; 
+
+
     return (
         <>
             {!loaded && <LoadingContainer />}
             <PokeGrid pokemonList={newPokemonList.length > 0 ? newPokemonList : pokemonList} />
+            <Pagenation handlePagesClick={handlePagesClick} />
         </>
     );
 }
