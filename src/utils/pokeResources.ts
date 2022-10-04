@@ -46,3 +46,47 @@ export const fetchPokemon = async (props: any) => {
 
     setPokemonList(pokemon);
 }
+
+export const handleFilterList = async (props: any) => {
+    const { setNewPokemonList, ItemPerPage, filterList } = props;
+    let endNum: number;
+    let startNum: number;
+    let currentUrlParams = new URLSearchParams(window.location.search);
+    let currentPageNum = Number(currentUrlParams.get("page"));
+    currentPageNum = parseInt(currentPageNum.toString());
+    let pokeList: any = [];
+
+    setNewPokemonList([]);
+
+    if (!currentPageNum) {
+        endNum = ItemPerPage;
+        startNum = 0;
+    } else {
+        endNum = currentPageNum * ItemPerPage;
+        startNum = endNum - ItemPerPage;
+    }
+
+    let filterPromises = Object.keys(filterList).map((filter: any) =>
+        apiClient.get(`type/${filter}/`)
+    );
+
+    await Promise.all(filterPromises).then((all) => {
+        const data = all.map((result) => result.data.pokemon);
+        data.forEach((poke) =>
+            poke.map((pokemon: any) => pokeList.push(pokemon.pokemon))
+        );
+    });
+
+    pokeList.map((poke: any) => {
+        let id = poke.url.match(regexPat)[1];
+        return (poke["id"] = id);
+    });
+    let cutPokemon;
+
+    if (startNum > pokeList.length) {
+        cutPokemon = pokeList.slice(0, ItemPerPage);
+    } else {
+        cutPokemon = pokeList.slice(startNum, endNum);
+        setNewPokemonList(cutPokemon);
+    }
+}
