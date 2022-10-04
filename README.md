@@ -11,21 +11,28 @@ There is pagination for user to search for more pokomon-go
 
 # Pokemon-Go: 
 
-- [ ] Checked itemCreate a web application to list all Pokémon and show paginated results
-- [ ] User should be shown the Pokémons in a card-based layout (click to see best practices)
-- [ ] Each card should contain the image of the Pokémon: `Name`, `Height`, `Weight`, `List of abilities`
-- [ ] User should have option to choose the number of cards available per page available options are 10, 20 and 50
-- [ ] User should be shown previous and next links - on both the top and the bottom of the page
-- [ ] User should be able to search through the Pokémon list using the name and abilities
+- [x] Checked itemCreate a web application to list all Pokémon and show paginated results
+- [x] User should be shown the Pokémons in a card-based layout (click to see best practices)
+- [x] Each card should contain the image of the Pokémon: `Name`, `Height`, `Weight`, `List of abilities`
+- [x] User should have option to choose the number of cards available per page available options are 10, 20 and 50
+- [x] User should be shown previous and next links - on both the top and the bottom of the page
+- [x] User should be able to search through the Pokémon list using the name and abilities
 - [ ] User should be able to sort the result by name, height and weight.
-- [ ] Page refresh should maintain the sorting and search related data.
-- [ ] User should be taken to the details page and present all the information available for that Pokémon. 
+- [x] Page refresh should maintain the sorting and search related data.
+- [x] User should be taken to the details page and present all the information available for that Pokémon. 
+- [ ] Test cases
 
 #### How to start:
 
 ### `npm start`
 ### `npm test`
 ### `npm run build`
+
+### Scope of imporvements:
+
+- Test cases
+- Bug's in fitering
+- More refactoring `pokoResources.ts`
 
 #### Tech used:
 
