@@ -20,6 +20,9 @@ import {
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { HamburgerMenuContainer, NavBar, MainNav, MainNavLists, SearchBarContainer } from './NavBar.module'
 
+import { SearchBar } from '../searchBar/SearchBar'
+import { Filter } from '../filter/Filter';
+
 interface NavBarProps {
     navigateTo: any;
     handleFilter: (val: string) => void;
@@ -87,7 +90,12 @@ export const PokemonNavBar = ({navigateTo, handleFilter, location}: NavBarProps)
                         </li>
                         <li>
                             <SearchBarContainer>
-                                {/* Searching and filters */}
+                                <SearchBar navigateTo={navigateTo} handleSearchClick={handleClick} />
+                                <Filter
+                                    handleFilter={handleFilter}
+                                    handleFilterClick={handleClick}
+                                    location={location}
+                                />
                             </SearchBarContainer>
                         </li>
                     </MainNavLists>
@@ -125,7 +133,12 @@ export const PokemonNavBar = ({navigateTo, handleFilter, location}: NavBarProps)
                             </DrawerBody>
                             <DrawerFooter>
                                 <SearchBarContainer>
-                                    {/* Searching and filters */}
+                                    <SearchBar navigateTo={navigateTo} handleSearchClick={handleClick} />
+                                    <Filter
+                                        handleFilter={handleFilter}
+                                        handleFilterClick={handleClick}
+                                        location={location}
+                                    />
                                 </SearchBarContainer>
                             </DrawerFooter>
                         </DrawerContent>
