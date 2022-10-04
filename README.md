@@ -30,6 +30,7 @@ There is pagination for user to search for more pokomon-go
 
 ### Scope of imporvements:
 
+- Better type checking
 - Test cases
 - Bug's in fitering
 - More refactoring `pokoResources.ts`
