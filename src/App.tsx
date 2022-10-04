@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Routes ,Route } from "react-router";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Details } from "./components/details/Details";
 import { PokemonNavBar } from "./components/navbar/NavBar";
 import { PokeCalls } from "./components/pokecalls/PokeCalls";
 
@@ -22,6 +23,7 @@ function App() {
       <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PokeCalls navigateTo={navigate} filterList={typeFilters} handleFilter={handleFilters} />}/>
           <Route path="/item-limit/:num" element={<PokeCalls navigateTo={navigate} filterList={typeFilters} handleFilter={handleFilters} />}/>
+          <Route path="/detail/:name" element={<Details location={location} match={typeFilters} />}/>
       </Routes>
     </>
   );

@@ -114,3 +114,129 @@ export const pagesClicked = async (props: any) => {
         fetchPokemon({ setLoaded, setPokemonList, setNewPokemonList, ItemPerPage }) :
         handleFilterList({ setNewPokemonList, ItemPerPage, filterList });
 }
+
+export const fetchPokeName = async (props: any) => {
+    const { setIsLoaded, setPokeSpeciesData, setPokeData } = props;
+
+    setIsLoaded(false);
+
+    const pokeName = window.location.pathname.split('/')[2];
+    const lowerCasePokeName = pokeName.toLowerCase();
+
+    try {
+        const { data } = await apiClient.get(`pokemon/${lowerCasePokeName}/`);
+        const { data: speciesData } = await apiClient.get(`pokemon-species/${data.id}/`);
+
+        setPokeSpeciesData(speciesData);
+        setPokeData(data);
+        setIsLoaded(true);
+    } catch (error: any) {
+        setIsLoaded(true);
+    }
+}
+
+export const fetchPokeTypes = async (props: any) => {
+    const { setLoading, setTypesData, setAbilitiesData, types, abilities } = props;
+    setLoading(true);
+    getPokeTypes({ types, setTypesData });
+    getPokeAbilities({ abilities, setAbilitiesData });
+    setLoading(false);
+}
+
+const getPokeTypes = async ({ types, setTypesData }: any) => {
+    const typesArray = [];
+    for (const { type } of types) {
+        const { data } = await apiClient.get(type.url);
+        typesArray.push(data);
+    }
+    const totalEffectives: any = getEffectives(typesArray);
+    setTypesData(totalEffectives);
+}
+
+const getPokeAbilities = async ({ abilities, setAbilitiesData }: any) => {
+    const abilitiesArray: any = [];
+    for (const { ability, is_hidden } of abilities) {
+        const { data } = await apiClient.get(ability.url);
+        const abilityData = buildAbility(data, is_hidden);
+        abilitiesArray.push(abilityData);
+    }
+    setAbilitiesData(abilitiesArray);
+}
+
+const buildAbility = (data: { name?: any; effect_entries?: any; }, is_hidden: any) => {
+    const { effect_entries } = data;
+    const englishAbility = effect_entries.find(
+        ({ language }: any) => language.name === "en"
+    );
+    return {
+        hiddenAbility: is_hidden,
+        abilityText: englishAbility.short_effect,
+        name: data.name,
+    };
+};
+
+const covertToArrayOfNames = (array: { name: any; }[]) => {
+    return array.map(({ name }) => name);
+};
+
+const getEffectives = (types: any[]) => {
+    const typeEffectives = types.reduce((acc, type) => {
+        // group all effectives together
+        const { damage_relations } = type;
+        const {
+            double_damage_to,
+            double_damage_from,
+            half_damage_from,
+            half_damage_to,
+            no_damage_from,
+        } = damage_relations;
+        acc.superEffective = acc.superEffective
+            ? acc.superEffective.concat(covertToArrayOfNames(double_damage_to))
+            : covertToArrayOfNames(double_damage_to);
+
+        acc.superWeak = acc.superWeak
+            ? acc.superWeak.concat(covertToArrayOfNames(double_damage_from))
+            : covertToArrayOfNames(double_damage_from);
+
+        acc.halfWeak = acc.halfWeak
+            ? acc.halfWeak.concat(covertToArrayOfNames(half_damage_from))
+            : covertToArrayOfNames(half_damage_from);
+
+        acc.halfEffective = acc.halfEffective
+            ? acc.halfEffective.concat(covertToArrayOfNames(half_damage_to))
+            : covertToArrayOfNames(half_damage_to);
+        acc.noDamageTo = acc.noDamageTo
+            ? acc.noDamageTo.concat(covertToArrayOfNames(no_damage_from))
+            : covertToArrayOfNames(no_damage_from);
+        return acc;
+    }, {});
+
+    typeEffectives.superEffective = typeEffectives.superEffective.filter(
+        (name: any) => {
+            return !typeEffectives.halfEffective.includes(name);
+        }
+    );
+
+    typeEffectives.superWeak = typeEffectives.superWeak.filter(
+        (name: any) => {
+            return (
+                !typeEffectives.halfWeak.includes(name) &&
+                !typeEffectives.noDamageTo.includes(name)
+            );
+        }
+    );
+
+    typeEffectives.halfEffective = typeEffectives.halfEffective.filter(
+        (name: any) => {
+            return !typeEffectives.superEffective.includes(name);
+        }
+    );
+
+    typeEffectives.halfWeak = typeEffectives.halfWeak.filter(
+        (name: any) => {
+            return !typeEffectives.superWeak.includes(name);
+        }
+    );
+
+    return typeEffectives;
+};
