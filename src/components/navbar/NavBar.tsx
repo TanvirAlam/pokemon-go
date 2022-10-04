@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { NavLink } from 'react-router-dom'
 
 import {
@@ -49,11 +49,12 @@ export const PokemonNavBar = ({navigateTo, handleFilter, location}: NavBarProps)
         let currentUrlParams = new URLSearchParams(window.location.search);
         currentUrlParams.set("page", "1");
         setItemPerPage(numItem)
+        changeURL(itemPerPage)
     }
 
-    useEffect(() => {
+    const changeURL = useCallback((itemPerPage: any)=> {
         navigateTo(`/item-limit/${itemPerPage}`);
-    }, [itemPerPage]);
+    },[itemPerPage])
 
     return (
         <NavBar>
