@@ -3,7 +3,12 @@ import { Text, Divider, Heading } from "@chakra-ui/react";
 
 import { CardContainer, CardHeader, CardBody } from './Card.module'
 
-export const Card = ({ type, header, children }: any) => {
+interface CardProps {
+    header: string;
+    children: React.ReactElement
+}
+
+export const Card = ({ header, children }: CardProps) => {
   return (
     <CardContainer>
       <CardHeader>

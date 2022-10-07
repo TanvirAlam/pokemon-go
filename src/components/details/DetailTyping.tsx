@@ -43,47 +43,49 @@ export const DetailTyping = ({ types, abilities }: any) => {
 
   return (
     <>
-        <Card header="Type effectiveness" type="types">
+        <Card header="Type effectiveness">
             <>
-                <Text mb="1rem">2x weak against</Text>
-                <TypesListContainer>
-                    {typesData?.superWeak.map((name: any) => {
-                        return (
-                            <Tag
-                                bgColor={`type.${name}`}
-                                key={name}
-                                size="sm"
-                                variant="solid"
-                                borderRadius="full"
-                            >
-                                <TagLabel key={name} textTransform="capitalize">
-                                    {name}
-                                </TagLabel>
-                            </Tag>
-                        );
-                    })}
-                </TypesListContainer>
-            </>
-            <>
-                <Text mb="1rem">2x Effective against</Text>
-                <TypesListContainer>
-                    {typesData.superEffective.map(({ name }: any) => {
-                        return (
-                            <Tag
-                                bgColor={`type.${name}`}
-                                key={name}
-                                size="sm"
-                                variant="solid"
-                                borderRadius="full"
-                            >
-                                <TagLabel textTransform="capitalize">{name}</TagLabel>
-                            </Tag>
-                        );
-                    })}
-                </TypesListContainer>
+                <>
+                    <Text mb="1rem">2x weak against</Text>
+                    <TypesListContainer>
+                        {typesData?.superWeak.map((name: any) => {
+                            return (
+                                <Tag
+                                    bgColor={`type.${name}`}
+                                    key={name}
+                                    size="sm"
+                                    variant="solid"
+                                    borderRadius="full"
+                                >
+                                    <TagLabel key={name} textTransform="capitalize">
+                                        {name}
+                                    </TagLabel>
+                                </Tag>
+                            );
+                        })}
+                    </TypesListContainer>
+                </>
+                <>
+                    <Text mb="1rem">2x Effective against</Text>
+                    <TypesListContainer>
+                        {typesData.superEffective.map(({ name }: any) => {
+                            return (
+                                <Tag
+                                    bgColor={`type.${name}`}
+                                    key={name}
+                                    size="sm"
+                                    variant="solid"
+                                    borderRadius="full"
+                                >
+                                    <TagLabel textTransform="capitalize">{name}</TagLabel>
+                                </Tag>
+                            );
+                        })}
+                    </TypesListContainer>
+                </>
             </>
         </Card>
-        <Card type="abilities" header="Abilities">
+        <Card header="Abilities">
             <Accordion allowMultiple>
                 { abilitiesData && abilitiesData.map(({ abilityText, hiddenAbility, name }: any) => {
                     return (
