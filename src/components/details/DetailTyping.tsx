@@ -4,18 +4,18 @@ import { Loading } from '../loading/Loading'
 import {
   Text,
   Tag,
-  TagLabel,
+  HStack,
   Accordion,
   AccordionItem,
   AccordionButton,
-  AccordionPanel,
   AccordionIcon,
+  AccordionPanel,
   Box,
-  Badge,
+  Badge
 } from "@chakra-ui/react";
 import { Card } from "../card/Card";
 
-import { TypesListContainer } from './DetailTyping.module'
+import { TypesListContainer, PokeDetailContainer } from './DetailTyping.module'
 
 interface TypesDataProps {
     superEffective: any;
@@ -41,71 +41,82 @@ export const DetailTyping = ({ types, abilities }: any) => {
     return <Loading />;
   }
 
+  console.log(typesData?.superWeak)
   return (
     <>
-        <Card header="Type effectiveness">
+        <Card header="Type Effectiveness">
             <>
-                <>
-                    <Text mb="1rem">2x weak against</Text>
+                <PokeDetailContainer>
+                    <Text>Effectiveness:</Text>
                     <TypesListContainer>
-                        {typesData?.superWeak.map((name: any) => {
-                            return (
-                                <Tag
-                                    bgColor={`type.${name}`}
-                                    key={name}
-                                    size="sm"
-                                    variant="solid"
-                                    borderRadius="full"
-                                >
-                                    <TagLabel key={name} textTransform="capitalize">
+                        <HStack spacing={4}>
+                            {typesData.superEffective.map((name: string) => {
+                                return (
+                                    <Tag
+                                        bgColor={`type.${name}`}
+                                        key={name}
+                                        size="md"
+                                        variant="solid"
+                                        borderRadius="full"
+                                    >
                                         {name}
-                                    </TagLabel>
-                                </Tag>
-                            );
-                        })}
+                                    </Tag>
+                                );
+                            })}
+                        </HStack>
                     </TypesListContainer>
-                </>
-                <>
-                    <Text mb="1rem">2x Effective against</Text>
+                </PokeDetailContainer>
+            </>
+        </Card>
+        <Card header="Type Weekness">
+            <>
+                <PokeDetailContainer>
+                    <Text>Weekness:</Text>
                     <TypesListContainer>
-                        {typesData.superEffective.map(({ name }: any) => {
-                            return (
-                                <Tag
-                                    bgColor={`type.${name}`}
-                                    key={name}
-                                    size="sm"
-                                    variant="solid"
-                                    borderRadius="full"
-                                >
-                                    <TagLabel textTransform="capitalize">{name}</TagLabel>
-                                </Tag>
-                            );
-                        })}
+                        <HStack spacing={4}>
+                            {typesData?.superWeak.map((name: string) => {
+                                return (
+                                    <Tag
+                                        bgColor={`type.${name}`}
+                                        key={name}
+                                        size="md"
+                                        variant="solid"
+                                        borderRadius="full"
+                                    >
+                                        {name}
+                                    </Tag>
+                                );
+                            })}
+                        </HStack>
                     </TypesListContainer>
-                </>
+                </PokeDetailContainer>
             </>
         </Card>
         <Card header="Abilities">
-            <Accordion allowMultiple>
-                { abilitiesData && abilitiesData.map(({ abilityText, hiddenAbility, name }: any) => {
-                    return (
-                    <AccordionItem key={name}>
-                            <AccordionButton>
-                                <Box textTransform="capitalize" flex="1" textAlign="left">
-                                    {name}
-                                    {hiddenAbility ? (
-                                        <Badge ml="1rem" colorScheme="purple">
-                                            Hidden Ability
-                                        </Badge>
-                                    ) : null}
-                                </Box>
-                                <AccordionIcon />
-                            </AccordionButton>
-                        <AccordionPanel pb={4}>{abilityText}</AccordionPanel>
-                    </AccordionItem>
-                    );
-                })}
-            </Accordion>
+            <>
+                <PokeDetailContainer>
+                    <Accordion allowMultiple>
+                        { abilitiesData && abilitiesData.map(({ index, abilityText, hiddenAbility, name }: any) => {
+                            return (
+                                <AccordionItem key={index}>
+                                        <AccordionButton>
+                                            <Box textTransform="capitalize" flex="1" textAlign="left">
+                                                {name}
+                                                {hiddenAbility ? (
+                                                    <Badge ml="1rem" colorScheme="purple">
+                                                        Hidden Ability
+                                                    </Badge>
+                                                ) : null}
+                                            </Box>
+                                            <AccordionIcon />
+                                        </AccordionButton>
+                                    <AccordionPanel pb={4}>{abilityText}</AccordionPanel>
+                                </AccordionItem>
+                            );
+                        })}
+                    </Accordion>
+                </PokeDetailContainer>
+            </>
         </Card>
     </>
   )
