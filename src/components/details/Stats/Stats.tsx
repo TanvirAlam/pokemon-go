@@ -1,9 +1,9 @@
 import React from 'react'
 import { Progress, Text } from "@chakra-ui/react";
 
-import { StatContainer } from './DetailStats.module'
+import { StatContainer } from './Stats.module'
 
-export const DetailStats = ({ stats }: any) => {
+export const Stats = ({ stats }: any) => {
   return (
     <>
         {stats.map(({ base_stat, stat }: any, i: number) => (

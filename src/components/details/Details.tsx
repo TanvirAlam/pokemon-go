@@ -25,9 +25,9 @@ import {
     TabContainer
 } from './Details.module'
 import { Loading } from "../loading/Loading";
-import { DetailAbout } from "./DetailAbout";
-import { DetailStats } from "./DetailStats";
-import { DetailTyping } from "./DetailTyping";
+import { About } from "./About/About";
+import { Stats } from "./Stats/Stats";
+import { Typing } from "./Typing/Typing";
 
 interface pokeSpeciesDataProps {
     flavor_text_entries: any;
@@ -114,16 +114,16 @@ export const Details = ({location, match}: any): JSX.Element => {
                     </TabList>
                     <TabPanels>
                         <TabPanel>
-                            <DetailAbout
+                            <About
                                 height={pokeData?.height}
                                 weight={pokeData?.weight}
                             />
                         </TabPanel>
                         <TabPanel>
-                            <DetailStats stats={pokeData?.stats} />
+                            <Stats stats={pokeData?.stats} />
                         </TabPanel>
                         <TabPanel>
-                            <DetailTyping
+                            <Typing
                                 types={pokeData?.types}
                                 abilities={pokeData?.abilities}
                             />

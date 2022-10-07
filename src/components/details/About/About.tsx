@@ -1,9 +1,9 @@
 import React from 'react'
 import { Text } from "@chakra-ui/react";
 
-import { WeightHeightContainer } from './DetailAbout.module'
+import { WeightHeightContainer } from './About.module'
 
-export const DetailAbout = ({height, weight}: any) => {
+export const About = ({height, weight}: any) => {
   const getHeight = () => {
     const heightInInches = height * 3.937;
     const heightInFeet = Number(heightInInches.toFixed(0)) / 12;

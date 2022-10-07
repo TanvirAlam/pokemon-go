@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { fetchPokeTypes } from '../../utils/pokeResources';
-import { Loading } from '../loading/Loading'
+import { fetchPokeTypes } from '../../../utils/pokeResources';
+import { Loading } from '../../loading/Loading'
 import {
   Text,
   Tag,
@@ -13,16 +13,16 @@ import {
   Box,
   Badge
 } from "@chakra-ui/react";
-import { Card } from "../card/Card";
+import { Card } from "../../card/Card";
 
-import { TypesListContainer, PokeDetailContainer } from './DetailTyping.module'
+import { TypesListContainer, PokeDetailContainer } from './Typing.module'
 
 interface TypesDataProps {
     superEffective: any;
     superWeak: any
 }; 
 
-export const DetailTyping = ({ types, abilities }: any) => {
+export const Typing = ({ types, abilities }: any) => {
     const [typesData, setTypesData] = useState<TypesDataProps>();
     const [abilitiesData, setAbilitiesData] = useState([]);
     const [loading, setLoading] = useState(false);
