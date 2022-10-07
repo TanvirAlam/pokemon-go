@@ -6,13 +6,13 @@ import { PokemonNavBar } from "./components/navbar/NavBar";
 import { PokeCalls } from "./components/pokecalls/PokeCalls";
 
 function App() {
-  const [typeFilters, setTypeFilters] = useState("");
+  const [typeFilters, setTypeFilters] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleFilters = (typeFilters: string) => {
+  const handleFilters = (typeFilters: React.SetStateAction<{}>) => {
     if (!typeFilters) {
-      setTypeFilters("");
+      setTypeFilters({});
     }
     setTypeFilters(typeFilters);
   };

@@ -13,7 +13,12 @@ import { types } from '../../utils/pokeResources';
 import { ViewIcon } from "@chakra-ui/icons";
 import { FilterContainer, FilterButton } from './Filter.module'
 
-export const Filter = ({ handleFilter, handleFilterClick, location }: any) => {
+interface FilterProps {
+    handleFilter: (val: {}) => void;
+    location: string;
+}
+
+export const Filter = ({ handleFilter, location }: FilterProps) => {
     const [filterBoxes, setFilterBoxes] = useState({});
     const [showFilters, setShowFilters] = useState(false);
 
@@ -26,14 +31,12 @@ export const Filter = ({ handleFilter, handleFilterClick, location }: any) => {
         event.preventDefault();
         handleFilter(filterBoxes);
         setShowFilters(false);
-        handleFilterClick();
     };
 
     const handleClearFilters = () => {
         setFilterBoxes([]);
         handleFilter([]);
         setShowFilters(false);
-        handleFilterClick();
     };
 
     return (

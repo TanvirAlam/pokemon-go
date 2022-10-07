@@ -24,8 +24,8 @@ import { SearchBar } from '../searchBar/SearchBar'
 import { Filter } from '../filter/Filter';
 
 interface NavBarProps {
-    navigateTo: any;
-    handleFilter: (val: string) => void;
+    navigateTo:  (url: string) => void;
+    handleFilter: (val: {}) => void;
     location: string;
 }
 
@@ -94,7 +94,6 @@ export const PokemonNavBar = ({navigateTo, handleFilter, location}: NavBarProps)
                                 <SearchBar navigateTo={navigateTo} handleSearchClick={handleClick} />
                                 <Filter
                                     handleFilter={handleFilter}
-                                    handleFilterClick={handleClick}
                                     location={location}
                                 />
                             </SearchBarContainer>
@@ -137,7 +136,6 @@ export const PokemonNavBar = ({navigateTo, handleFilter, location}: NavBarProps)
                                     <SearchBar navigateTo={navigateTo} handleSearchClick={handleClick} />
                                     <Filter
                                         handleFilter={handleFilter}
-                                        handleFilterClick={handleClick}
                                         location={location}
                                     />
                                 </SearchBarContainer>
