@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { fetchPokeTypes } from '../../../utils/pokeResources';
 import { Loading } from '../../loading/Loading'
 import {
-  Text,
-  Tag,
-  HStack,
   Accordion,
   AccordionItem,
   AccordionButton,
@@ -15,12 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { Card } from "../../card/Card";
 
-import { TypesListContainer, PokeDetailContainer } from './Typing.module'
+import { PokeDetailContainer } from './Typing.module'
 import { TypingDetails } from "./TypingDetails";
 
 interface TypesDataProps {
-    superEffective: any;
-    superWeak: any
+    superEffective: [];
+    superWeak: []
 }; 
 
 export const Typing = ({ types, abilities }: any) => {
@@ -36,13 +33,12 @@ export const Typing = ({ types, abilities }: any) => {
             types, 
             abilities
         });
-    }, []);
+    }, [abilities, types]);
   
   if (loading || !typesData) {
     return <Loading />;
   }
 
-  console.log(typesData?.superWeak)
   return (
     <>
         <Card header="Type Effectiveness">

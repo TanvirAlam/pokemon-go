@@ -18,8 +18,6 @@ export const PokeCalls = ({ navigateTo, filterList }: PokeCallsProps) => {
 
     useEffect(() => {
         if (Object.keys(filterList).length > 0) {
-            console.log(filterList);
-            
             handleFilterList({setNewPokemonList, ItemPerPage, filterList});
         } else {
             fetchPokemon({setPokemonList, setLoaded, ItemPerPage});
