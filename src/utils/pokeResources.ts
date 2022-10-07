@@ -31,23 +31,24 @@ export const fetchPokemon = async (props: FetchPokemonProps) => {
     let currentPageNum: number = Number(currentUrlParams.get("page"));
     setLoaded(false);
 
-    if (currentPageNum > ItemPerPage) { }
     if (!currentPageNum) {
         offsetNum = 0;
     } else {
         offsetNum = currentPageNum * ItemPerPage - ItemPerPage;
     }
 
-
-    const res = await apiClient.get(`pokemon/?limit=${ItemPerPage}&offset=${offsetNum}`);
-    let pokemon = res.data.results;
-    pokemon.map((pokemon: any) => {
-        let id = pokemon.url.match(regexPat)[1];
-        return (pokemon["id"] = id);
-    });
-
-    setPokemonList(pokemon);
-    setLoaded(true);
+    //handleFilterList({ setNewPokemonList, ItemPerPage, filterList });
+    await apiClient
+        .get(`pokemon/?limit=${ItemPerPage}&offset=${offsetNum}`)
+        .then((res) => {
+            let pokemon = res.data.results;
+            pokemon.map((pokemon: any) => {
+                let id = pokemon.url.match(regexPat)[1];
+                return (pokemon["id"] = id);
+            });
+            setPokemonList(pokemon);
+            setLoaded(true);
+        });
 }
 
 export const handleFilterList = async (props: any) => {
@@ -112,7 +113,7 @@ export const pagesClicked = async (props: any) => {
     navigateTo(`?page=${currentPageNum}`);
 
     !filterList ?
-        fetchPokemon({ setLoaded, setPokemonList, setNewPokemonList, ItemPerPage }) :
+        fetchPokemon({ setLoaded, setPokemonList, ItemPerPage, filterList }) :
         handleFilterList({ setNewPokemonList, ItemPerPage, filterList });
 }
 

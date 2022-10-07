@@ -17,16 +17,7 @@ export const PokeCalls = ({ navigateTo, filterList }: PokeCallsProps) => {
     const ItemPerPage = urlNum ? urlNum : 20;
 
     useEffect(() => {
-        if (Object.keys(filterList).length > 0) {
-            handleFilterList({setNewPokemonList, ItemPerPage, filterList});
-        } else {
-            fetchPokemon({
-                setLoaded, ItemPerPage, setPokemonList,
-                setNewPokemonList: function (value: SetStateAction<never[]>): void {
-                    throw new Error("Function not implemented.");
-                }
-            });
-        }
+        fetchPokemon({ setLoaded, ItemPerPage, setPokemonList, filterList });
     }, [ItemPerPage, filterList]);
     
     const handlePagesClick = (direction: any) => {
@@ -40,7 +31,6 @@ export const PokeCalls = ({ navigateTo, filterList }: PokeCallsProps) => {
             navigateTo 
         });
     }; 
-
 
     return (
         <>

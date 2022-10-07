@@ -4,5 +4,5 @@ export interface FetchPokemonProps {
     setLoaded: Dispatch<SetStateAction<boolean>>;
     ItemPerPage: number;
     setPokemonList: Dispatch<SetStateAction<never[]>>;
-    setNewPokemonList: Dispatch<SetStateAction<never[]>>;
+    filterList: {};
 }
