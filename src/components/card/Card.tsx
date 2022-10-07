@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Divider, Heading } from "@chakra-ui/react";
+import { Divider, Heading } from "@chakra-ui/react";
 
 import { CardContainer, CardHeader, CardBody } from './Card.module'
 
@@ -12,7 +12,7 @@ export const Card = ({ header, children }: CardProps) => {
   return (
     <CardContainer>
       <CardHeader>
-        <Heading mb="1rem">{header}</Heading>
+        <Heading>{header}</Heading>
         <Divider />
       </CardHeader>
       <CardBody>
