@@ -21,8 +21,8 @@ function App() {
     <>
       <PokemonNavBar navigateTo={navigate} handleFilter={handleFilters} location="" />
       <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<PokeCalls navigateTo={navigate} filterList={typeFilters} handleFilter={handleFilters} />}/>
-          <Route path="/item-limit/:num" element={<PokeCalls navigateTo={navigate} filterList={typeFilters} handleFilter={handleFilters} />}/>
+          <Route path="/" element={<PokeCalls navigateTo={navigate} filterList={typeFilters} />}/>
+          <Route path="/item-limit/:num" element={<PokeCalls navigateTo={navigate} filterList={typeFilters} />}/>
           <Route path="/detail/:name" element={<Details location={location} match={typeFilters} />}/>
       </Routes>
     </>

@@ -4,7 +4,12 @@ import { LoadingContainer } from "../loading/Loading.module";
 import { Pagenation } from "../pagenation/Pagenation";
 import { PokeGrid } from "../pokegrid/PokeGrid";
 
-export const PokeCalls = ({ navigateTo, filterList, handleFilter }: any) => {
+interface PokeCallsProps {
+    navigateTo: (val: {}) => void;
+    filterList: {};
+}
+
+export const PokeCalls = ({ navigateTo, filterList }: PokeCallsProps) => {
     const [pokemonList, setPokemonList] = useState([]);
     const [newPokemonList, setNewPokemonList] = useState([]);
     const [loaded, setLoaded] = useState(false);
