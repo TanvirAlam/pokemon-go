@@ -45,17 +45,11 @@ export const PokemonNavBar = ({navigateTo, handleFilter, location}: NavBarProps)
         setShowNav(false);
     };
 
-    const updateItemPerPage = (numItem: number) => {
-        let currentUrlParams = new URLSearchParams(window.location.search);
-        currentUrlParams.set("page", "1");
-        setItemPerPage(numItem)
-        changeURL(itemPerPage)
-    }
-
-    const changeURL = useCallback((itemPerPage: any)=> {
+     const changeURL = useCallback((itemPerPage: any)=> {
+        setItemPerPage(itemPerPage);
         navigateTo(`/item-limit/${itemPerPage}`);
-    },[itemPerPage])
-
+    },[navigateTo])
+    
     return (
         <NavBar>
             <Box bg="gray.800" h="60px">
@@ -83,7 +77,7 @@ export const PokemonNavBar = ({navigateTo, handleFilter, location}: NavBarProps)
                                 <RadioGroup value={itemPerPage}>
                                     <Stack direction='row'>
                                         {cardsPerPages.map(({label, value}) => (
-                                            <Radio key={value} onChange={() => updateItemPerPage(value)} value={value}>{label}</Radio>
+                                            <Radio key={value} onChange={() => changeURL(value)} value={value}>{label}</Radio>
                                         ))}
                                     </Stack>
                                 </RadioGroup>
