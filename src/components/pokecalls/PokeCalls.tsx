@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, SetStateAction } from "react";
 import { fetchPokemon, handleFilterList, pagesClicked } from '../../utils/pokeResources';
 import { LoadingContainer } from "../loading/Loading.module";
 import { Pagenation } from "../pagenation/Pagenation";
@@ -20,7 +20,12 @@ export const PokeCalls = ({ navigateTo, filterList }: PokeCallsProps) => {
         if (Object.keys(filterList).length > 0) {
             handleFilterList({setNewPokemonList, ItemPerPage, filterList});
         } else {
-            fetchPokemon({setPokemonList, setLoaded, ItemPerPage});
+            fetchPokemon({
+                setLoaded, ItemPerPage, setPokemonList,
+                setNewPokemonList: function (value: SetStateAction<never[]>): void {
+                    throw new Error("Function not implemented.");
+                }
+            });
         }
     }, [ItemPerPage, filterList]);
     

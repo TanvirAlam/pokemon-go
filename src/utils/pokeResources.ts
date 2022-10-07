@@ -1,4 +1,5 @@
 import apiClient from './http-common';
+import { FetchPokemonProps } from './types';
 
 export const types = [
     "fire",
@@ -23,7 +24,7 @@ export const types = [
 
 let regexPat: RegExp = /\/pokemon\/(\d+)\//;
 
-export const fetchPokemon = async (props: any) => {
+export const fetchPokemon = async (props: FetchPokemonProps) => {
     const { setPokemonList, setLoaded, ItemPerPage } = props;
     let offsetNum = 0;
     let currentUrlParams: URLSearchParams = new URLSearchParams(window.location.search);
