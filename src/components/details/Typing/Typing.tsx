@@ -16,6 +16,7 @@ import {
 import { Card } from "../../card/Card";
 
 import { TypesListContainer, PokeDetailContainer } from './Typing.module'
+import { TypingDetails } from "./TypingDetails";
 
 interface TypesDataProps {
     superEffective: any;
@@ -47,48 +48,14 @@ export const Typing = ({ types, abilities }: any) => {
         <Card header="Type Effectiveness">
             <>
                 <PokeDetailContainer>
-                    <Text>Effectiveness:</Text>
-                    <TypesListContainer>
-                        <HStack spacing={4}>
-                            {typesData.superEffective.map((name: string) => {
-                                return (
-                                    <Tag
-                                        bgColor={`type.${name}`}
-                                        key={name}
-                                        size="md"
-                                        variant="solid"
-                                        borderRadius="full"
-                                    >
-                                        {name}
-                                    </Tag>
-                                );
-                            })}
-                        </HStack>
-                    </TypesListContainer>
+                    <TypingDetails heading="Effectiveness" pokeData={typesData?.superEffective} />
                 </PokeDetailContainer>
             </>
         </Card>
         <Card header="Type Weekness">
             <>
                 <PokeDetailContainer>
-                    <Text>Weekness:</Text>
-                    <TypesListContainer>
-                        <HStack spacing={4}>
-                            {typesData?.superWeak.map((name: string) => {
-                                return (
-                                    <Tag
-                                        bgColor={`type.${name}`}
-                                        key={name}
-                                        size="md"
-                                        variant="solid"
-                                        borderRadius="full"
-                                    >
-                                        {name}
-                                    </Tag>
-                                );
-                            })}
-                        </HStack>
-                    </TypesListContainer>
+                    <TypingDetails heading="Weekness" pokeData={typesData?.superWeak} />
                 </PokeDetailContainer>
             </>
         </Card>
